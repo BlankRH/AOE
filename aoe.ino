@@ -1,3 +1,7 @@
+#include "Adafruit_MCP23017.h"
+
+Adafruit_MCP23017 mcp;
+
 /*
 const int VRxPin1 = A0;//0，-1
 const int VRyPin1 = A4;
@@ -48,6 +52,12 @@ void setup() {
       pinMode(LEDPin[i][i], OUTPUT);
     pinMode(laserPin[i], OUTPUT);
   }
+
+  mcp.begin();
+  /*
+   * Set up pin modes for all GPIO
+   * mcp.pinMode(0, OUTPUT);
+   */
   
   Serial.begin(9600);
 }
@@ -55,6 +65,11 @@ void setup() {
 void loop() {
   
   detect_joystick();
+  /*
+   * mcp methods
+   * mcp.digitalWrite()
+   */
+
   
   for(int i=0; i<2; i++) {
     stop_laser(i);

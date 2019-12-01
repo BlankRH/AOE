@@ -18,7 +18,9 @@ void detect_joystick() {
   }
 
   if(gameOver && coord[0][1] > -1 && coord[1][1] > -1) {
+    
     game_restart();
+    
   }
     
   //test_print_joystick(coord[0][0], coord[0][1], coord[1][0], coord[1][1]);
