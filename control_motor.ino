@@ -1,4 +1,4 @@
-void change_direction(int iXCoord,int player) {
+void control_motor(int iXCoord,int player) {
 
   int speed;
   
@@ -6,6 +6,8 @@ void change_direction(int iXCoord,int player) {
     speed = absSpeed;
   else if(iXCoord< -1)
     speed = -absSpeed;
+  else
+    speed = 0;
     
   set_motor_pwm(speed, motorPin[player][0], motorPin[player][1]);
   

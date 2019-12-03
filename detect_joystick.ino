@@ -5,22 +5,24 @@ void detect_joystick() {
   for(int i=0; i<2; i++) {
     joystick(VRxPin[i], VRyPin[i], coord[i]);
 
-    if(!gameOver) {
-      change_direction(coord[i][0], i);
+  coord[1][0] -= 1; // adjust 
 
-      if(millis() > lastShootTime[i] + coldDownTime && coord[i][1] > -1) 
-        activate_laser(i); /*
+    if(!gameOver) {
+      control_motor(coord[i][0], i);
+      
+      if(millis() > lastShootTime[i] + coldDownTime && coord[i][1] == 0) {
+        Serial.println("SHOOTING");
+        activate_laser(i);
+      }
       else if(millis() < lastShootTime[i] + coldDownTime)
         cold_down_light(i);
       else if(millis() > lastShootTime[i] + coldDownTime)
-        ready_light(i);*/
+        ready_light(i);
     }   
   }
 
-  if(gameOver && coord[0][1] > -1 && coord[1][1] > -1) {
-    
+  if(gameOver && coord[0][1] == 0 && coord[1][1] == 0) {
     game_restart();
-    
   }
     
   //test_print_joystick(coord[0][0], coord[0][1], coord[1][0], coord[1][1]);
@@ -29,13 +31,12 @@ void detect_joystick() {
 void joystick(int VRxPin, int VRyPin, int *coord) {
    
   int x = analogRead(VRxPin);
-  int y = analogRead(VRyPin);
+  int y = digitalRead(VRyPin);
 
   int iXCoord = map(x,0,1023,-2,2);
-  int iYCoord = map(y,0,1023,-2,2);
 
   coord[0] = iXCoord;
-  coord[1] = iYCoord;
+  coord[1] = y;
 
 }
 
