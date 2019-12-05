@@ -1,21 +1,18 @@
 void cold_down_light(int player) {
-  for(int i=0; i<3; i++)
-    mcp.digitalWrite(LEDPin[player][i], LOW);
+  side_off_light(player);
 }
+
 void ready_light(int player) {
-  for(int i=0; i<3; i++)
-    mcp.digitalWrite(LEDPin[player][i], HIGH);
+  side_on_light(player);
 }
 
 void win_light(int winner) {
   
-  for(int i=0; i<3; i++)
-    mcp.digitalWrite(LEDPin[winner][i], HIGH);
+  side_on_light(winner);
   delay(1000);
   off_light();
   delay(1000);
-  for(int i=0; i<3; i++)
-    mcp.digitalWrite(LEDPin[winner][i], HIGH);
+  side_on_light(winner);
   delay(1000);
   off_light();
   
@@ -28,18 +25,30 @@ void tie_light() {
   
 }
 
+void side_on_light(int player) {
+  for(int i=0; i<3; i++)
+    mcp.digitalWrite(LEDPin[player][i], HIGH);
+  sideLightState[player] = true;
+  Serial.print(player);
+  Serial.println(" light on");
+}
+
+void side_off_light(int player) {
+  for(int i=0; i<3; i++)
+    mcp.digitalWrite(LEDPin[player][i], LOW);
+  sideLightState[player] = false;
+}
+
 void off_light() {
   
   for(int i=0; i<2; i++)
-    for(int j=0; j<3; j++)
-      mcp.digitalWrite(LEDPin[i][j], LOW);
+    side_off_light(i);
       
 }
 
 void restart_light() {
   
   for(int i=0; i<2; i++)
-    for(int j=0; j<3; j++)
-      mcp.digitalWrite(LEDPin[i][j], HIGH);
+    side_on_light(i);
       
 }
