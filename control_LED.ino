@@ -3,7 +3,8 @@ void cold_down_light(int player) {
 }
 
 void ready_light(int player) {
-  side_on_light(player);
+  mcp.digitalWrite(LEDPin[player][2], HIGH);
+  lightState[player][2] = 1;
 }
 
 void win_light(int winner) {
@@ -26,17 +27,28 @@ void tie_light() {
 }
 
 void side_on_light(int player) {
-  for(int i=0; i<3; i++)
+  for(int i=0; i<3; i++) {
     mcp.digitalWrite(LEDPin[player][i], HIGH);
-  sideLightState[player] = true;
+    lightState[player][i] = true;
+  }
   Serial.print(player);
   Serial.println(" light on");
 }
 
+void zhuci_on_light(int player) {
+  for(int i=0; i<1; i++)
+    if(!lightState[player][i]) {
+      mcp.digitalWrite(LEDPin[player][i], HIGH);
+      lightState[player][i] = true;
+      break;
+    }
+}
+
 void side_off_light(int player) {
-  for(int i=0; i<3; i++)
+  for(int i=0; i<3; i++) {
     mcp.digitalWrite(LEDPin[player][i], LOW);
-  sideLightState[player] = false;
+    lightState[player][i] = false;
+  }
 }
 
 void off_light() {

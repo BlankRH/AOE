@@ -19,7 +19,8 @@ const int restartDelay = 5000;
 int gameOver = 0;
 int state[2] = {0};
 int lastShootTime[2] = {0, 0};
-bool sideLightState[2] = {0, 0};
+bool lightState[2][3] = {0};
+int lastYCoord[2] = {-1};
 
 void setup() {
 
@@ -39,13 +40,14 @@ void setup() {
 }
 
 void loop() {
-  
+
+  Serial.print(1);
   test();
-  main();
+  //game();
   
 }
 
-void main() {
+void game() {
   
   detect_joystick();
   

@@ -32,7 +32,7 @@ void game_over() {
 
 void game_restart() {
 
-  Serial.println("Game Restart");
+  Serial.println("Game Restart..");
   reset();
   
   restart_light();
