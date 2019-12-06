@@ -1,5 +1,5 @@
 void test() {
-  //test_joystick();
+  test_joystick();
   //side_off_light(0);
   //side_off_light(1);
   //test_motor_both();
