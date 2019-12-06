@@ -40,7 +40,8 @@ void setup() {
 }
 
 void loop() {
-  
+
+  Serial.print(1);
   test();
   //game();
   

@@ -7,8 +7,8 @@ void detect_joystick() {
 
     if(gameOver <= 0) {
       control_motor(coord[i][0], i);
-      mode1(i, coord[i]);
-      //mode2(i, lastYCoord[i], coord[i][1]);
+      //mode1(i, coord[i]);
+      mode2(i, lastYCoord[i], coord[i][1]);
     }   
     lastYCoord[i] = coord[i][1];
   }
@@ -35,7 +35,7 @@ void mode1(int player, int *coord) {
     Serial.println(" Cold Down");
     cold_down_light(player);
   }
-  else if(!loadState) {
+  else if(!loadState && !lightState[player][1]) {
     zhuci_on_light(player);
   }
   else if(loadState && !lightState[player][2]) {

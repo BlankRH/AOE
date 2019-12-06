@@ -1,5 +1,7 @@
 void test() {
-  test_joystick();
+  //test_joystick();
+  //side_on_light(0);
+  //side_on_light(1);
   //side_off_light(0);
   //side_off_light(1);
   //test_motor_both();
@@ -7,6 +9,10 @@ void test() {
   //test_motor_side(1);
   //activate_laser(0);
   //activate_laser(1);
+  //stop_laser(0);
+  //stop_laser(1);
+  test_control_motor();
+  //test_sensor();
 }
 
 void test_sensor() {
@@ -16,6 +22,14 @@ void test_sensor() {
     Serial.print(i+1);
     Serial.print(" : ");
     Serial.println(read);
+  }
+}
+
+void test_control_motor() {
+  int coord[2][2];
+  for(int i=0; i<2; i++) {
+    joystick(VRxPin[i], VRyPin[i], coord[i]);
+    control_motor(coord[i][0], i);
   }
 }
 
